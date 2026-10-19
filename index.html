@@ -1,0 +1,91 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#0f766e">
+  <title>Patient Registration | Clinic</title>
+  <link rel="stylesheet" href="styles.css">
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script defer src="config.js"></script>
+  <script defer src="app.js"></script>
+</head>
+<body class="patient-page">
+  <header class="topbar">
+    <a class="brand" href="index.html"><span class="brand-mark">+</span><span><strong>Your Clinic</strong><small>Patient services</small></span></a>
+    <a class="quiet-link" href="doctor.html">Doctor login <span aria-hidden="true">→</span></a>
+  </header>
+
+  <main class="page-shell">
+    <section class="welcome">
+      <div class="eyebrow"><span class="status-dot"></span> PATIENT REGISTRATION</div>
+      <h1>Your health visit,<br><span>made simpler.</span></h1>
+      <p>Enter your details to register for a clinic visit. Reception can use your token number when you arrive.</p>
+      <div class="trust-note"><span aria-hidden="true">🔒</span> Your details are sent securely to the clinic.</div>
+    </section>
+
+    <section class="form-card">
+      <div class="card-heading">
+        <div><p class="eyebrow">NEW VISIT</p><h2>Patient details</h2></div>
+        <span class="step-chip">01 / 01</span>
+      </div>
+      <div id="config-warning" class="notice warning hidden">Setup needed: add your Supabase project URL and anon key in <code>config.js</code>.</div>
+      <div id="form-message" class="notice hidden" role="status" aria-live="polite"></div>
+
+      <form id="patient-form">
+        <div class="field">
+          <label for="full-name">Full name <span>*</span></label>
+          <input id="full-name" name="full_name" autocomplete="name" maxlength="100" required placeholder="Enter patient's full name">
+        </div>
+        <div class="field-grid">
+          <div class="field">
+            <label for="mobile">Mobile number <span>*</span></label>
+            <input id="mobile" name="mobile" inputmode="tel" autocomplete="tel" maxlength="16" required placeholder="10-digit mobile number">
+            <small>Include country code if needed.</small>
+          </div>
+          <div class="field">
+            <label for="age-dob">Age or date of birth <span>*</span></label>
+            <input id="age-dob" name="age_dob" maxlength="30" required placeholder="e.g. 28 or 12/04/1998">
+          </div>
+        </div>
+        <div class="field-grid">
+          <div class="field">
+            <label for="gender">Gender <span>*</span></label>
+            <select id="gender" name="gender" required>
+              <option value="">Select gender</option>
+              <option>Female</option><option>Male</option><option>Non-binary</option><option>Prefer not to say</option><option>Other</option>
+            </select>
+          </div>
+          <div class="field">
+            <label for="reason">Appointment reason <span>*</span></label>
+            <select id="reason" name="reason" required>
+              <option value="">Choose a reason</option>
+              <option>General consultation</option><option>Follow-up visit</option><option>Report review</option><option>Prescription consultation</option><option>Other</option>
+            </select>
+          </div>
+        </div>
+        <div class="field">
+          <label for="reason-notes">Additional note <span class="optional">(optional)</span></label>
+          <textarea id="reason-notes" name="reason_notes" rows="3" maxlength="300" placeholder="Brief note for the clinic (please avoid sharing sensitive details here)"></textarea>
+        </div>
+        <label class="consent"><input id="consent" type="checkbox" required><span>I confirm these details are correct and agree to share them with the clinic for registration and appointment management.</span></label>
+        <button class="button primary full-width" id="submit-button" type="submit"><span>Register patient</span><span aria-hidden="true">→</span></button>
+        <p class="form-footnote">Please contact the clinic directly for urgent medical concerns. This form is not an emergency service.</p>
+      </form>
+
+      <section id="receipt" class="receipt hidden" aria-live="polite">
+        <div class="receipt-icon">✓</div>
+        <p class="eyebrow">REGISTRATION CONFIRMED</p>
+        <h2>Your token is <span id="receipt-token">—</span></h2>
+        <p id="receipt-date" class="muted"></p>
+        <p class="receipt-name" id="receipt-name"></p>
+        <p class="muted">Please show this receipt to reception when you arrive.</p>
+        <button id="print-receipt" class="button secondary full-width" type="button">Print registration receipt</button>
+        <button id="register-another" class="text-button" type="button">Register another patient</button>
+      </section>
+    </section>
+  </main>
+
+  <footer class="footer">Patient information is intended for authorized clinic staff only.</footer>
+</body>
+</html>

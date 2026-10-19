@@ -1,0 +1,62 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#0f766e">
+  <title>Doctor Dashboard | Clinic</title>
+  <link rel="stylesheet" href="styles.css">
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script defer src="config.js"></script>
+  <script defer src="doctor.js"></script>
+</head>
+<body class="dashboard-page">
+  <header class="topbar">
+    <a class="brand" href="index.html"><span class="brand-mark">+</span><span><strong>Your Clinic</strong><small>Doctor workspace</small></span></a>
+    <a class="quiet-link" href="index.html">Patient registration <span aria-hidden="true">→</span></a>
+  </header>
+
+  <main class="dashboard-shell">
+    <section id="login-panel" class="login-card">
+      <div class="login-symbol">+</div>
+      <p class="eyebrow">AUTHORIZED ACCESS ONLY</p>
+      <h1>Doctor dashboard</h1>
+      <p class="muted">Sign in to view patient registrations and manage today's queue.</p>
+      <div id="login-message" class="notice hidden" role="status"></div>
+      <form id="login-form">
+        <div class="field"><label for="email">Doctor account email</label><input id="email" type="email" autocomplete="username" required placeholder="doctor@example.com"></div>
+        <div class="field"><label for="password">Password</label><input id="password" type="password" autocomplete="current-password" required placeholder="Enter password"></div>
+        <button class="button primary full-width" id="login-button" type="submit">Sign in securely <span aria-hidden="true">→</span></button>
+      </form>
+      <p class="form-footnote">Accounts should be created by the project administrator. Public sign-ups should remain disabled.</p>
+    </section>
+
+    <section id="dashboard-panel" class="hidden">
+      <div class="dashboard-heading">
+        <div><p class="eyebrow">CLINIC OVERVIEW</p><h1>Patient queue</h1><p class="muted" id="today-label"></p></div>
+        <button class="button secondary" id="logout-button" type="button">Sign out</button>
+      </div>
+      <div class="stats-grid">
+        <article class="stat-card"><span class="stat-label">Today's registrations</span><strong id="stat-total">0</strong><span class="stat-foot">Total patients registered</span></article>
+        <article class="stat-card"><span class="stat-label">Waiting</span><strong id="stat-waiting">0</strong><span class="stat-foot">Awaiting consultation</span></article>
+        <article class="stat-card"><span class="stat-label">Completed</span><strong id="stat-completed">0</strong><span class="stat-foot">Marked as completed</span></article>
+      </div>
+      <div id="dashboard-message" class="notice hidden" role="status"></div>
+      <section class="queue-card">
+        <div class="queue-toolbar">
+          <div><h2>Registrations</h2><p class="muted">New registrations refresh automatically.</p></div>
+          <div class="toolbar-actions"><input id="search-input" class="search-input" type="search" placeholder="Search name or mobile" aria-label="Search patients"><button id="refresh-button" class="button secondary" type="button">Refresh</button></div>
+        </div>
+        <div class="table-wrap">
+          <table>
+            <thead><tr><th>Token</th><th>Patient</th><th>Contact</th><th>Age / DOB</th><th>Gender</th><th>Reason</th><th>Registered</th><th>Status</th><th>Action</th></tr></thead>
+            <tbody id="patient-rows"><tr><td colspan="9" class="empty-cell">Sign in to load registrations.</td></tr></tbody>
+          </table>
+        </div>
+        <p class="table-footnote">Only access patient records when needed for clinic operations. Avoid leaving this dashboard open on a shared screen.</p>
+      </section>
+    </section>
+  </main>
+  <footer class="footer">Private clinic dashboard · Keep your login credentials confidential.</footer>
+</body>
+</html>
